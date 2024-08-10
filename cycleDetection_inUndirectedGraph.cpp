@@ -38,6 +38,23 @@ bool isCyclicUsingBFS(unordered_map<int,list<int>> &adj, unordered_map<int,bool>
 
     return false;
 }
+
+bool isCycleUsingDFS(unordered_map<int,list<int>> &adj, unordered_map<int,bool> &visited, int node ,int parent){
+    // parent =-1;
+    visited[node]=true;
+    for(auto neighbor: adj[node]){
+        if(! visited[neighbor]){
+            bool isCycleDetcted =isCycleUsingDFS(adj,visited,neighbor,node);
+            if(isCycleDetcted)
+                return true;
+            }
+        else if(neighbor != parent){
+               return true;
+            }
+        }
+        return false;
+    
+}
 string cycleDetection (vector<vector<int>>& edges, int n, int m)
 {
     unordered_map<int,list<int>> adj;
